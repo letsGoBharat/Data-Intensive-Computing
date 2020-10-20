@@ -23,7 +23,7 @@ def main():
     kafkaParams = {"metadata.broker.list": ip+':9092', "auto.offset.reset": 'smallest'} 
     myStream = KafkaUtils.createDirectStream(ssc, ['weather-stream'], kafkaParams)
 
-    counts = myStream.pprint()
+    myStream.pprint()
     
     #Starting Spark context
     ssc.start()
