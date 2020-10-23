@@ -1,21 +1,16 @@
 from kafka import KafkaConsumer
-import csv
-from datetime import datetime
-import os
+from pprint import pprint
+import json
 
+def kafka_consumer(topic_name, ip):
+    consumer = KafkaConsumer(topic_name,
+                            auto_offset_reset='earliest',
+                            bootstrap_servers=[ip],
+                            api_version=(0, 10, 0),
+                            value_deserializer = json.loads,
+                            consumer_timeout_ms=1000)
 
-consumer = KafkaConsumer('test')
-if os.path.isfile('messages.csv'):
-	print("messages.csv already exists...\ndeleting...")
-	os.remove('messages.csv')
+    for msg in consumer:
+        pprint(msg.value)
 
-with open('messages.csv', 'a') as f:
-	fWriter = csv.writer(f)
-	fWriter.writerow('message')
-	print("CSV initialised")
-	for message in consumer:
-		msg = str(message.value.decode())
-		# divide by 1000 as it's in ms
-		# ts = datetime.fromtimestamp(message.timestamp/1000).strftime("%A, %B %d, %Y %I:%M:%S")
-		# print("Writing message %s..." % msg)
-		fWriter.writerow([ts, msg])
+kafka_consumer('weather-stream', 'localhost')
