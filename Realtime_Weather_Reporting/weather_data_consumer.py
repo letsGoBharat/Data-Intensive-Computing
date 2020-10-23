@@ -17,7 +17,8 @@ consumer = KafkaConsumer('weather-stream',
 
 with open('weather-data.csv', 'a') as f:
 	fWriter = csv.writer(f)
+	fWriter.writerow(['timestamp','temp','feels_like','pressure','humidity','dew_point','clouds','visibility','wind_speed','wind_deg','weather','pop'])
 	print("CSV initialised")
 	for message in consumer:
-		msg = str(message.value)
-		fWriter.writerow([msg])
+		msg = message.value
+		fWriter.writerow([msg['dt'], msg['temp'], msg['feels_like'], msg['pressure'], msg['humidity'], msg['dew_point'], msg['clouds'], msg['visibility'], msg['wind_speed'], msg['wind_deg'], msg['weather'], msg['pop']])
