@@ -4,10 +4,6 @@ from datetime import datetime
 import os
 import json
 
-if os.path.isfile('weather-data.csv'):
-	print("weather-data.csv already exists...\ndeleting...")
-	os.remove('weather-data.csv')
-
 consumer = KafkaConsumer('weather-stream',
                             auto_offset_reset='earliest',
                             bootstrap_servers=['localhost'],

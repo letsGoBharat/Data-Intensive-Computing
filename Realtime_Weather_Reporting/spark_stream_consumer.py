@@ -10,11 +10,9 @@ import json
 import csv
 import os
 from pprint import pprint
-from pyspark.sql.functions import udf
-from pyspark.sql.types import StringType, MapType, ArrayType, LongType
-os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 pyspark-shell'
-os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3'
-os.environ['PYSPARK_DRIVER_PYTHON'] = '/usr/bin/python3'
+#os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 pyspark-shell'
+#os.environ['PYSPARK_PYTHON'] = '/usr/local/bin/python3'
+#os.environ['PYSPARK_DRIVER_PYTHON'] = '/usr/local/bin/python3'
 
 def save_as_csv(rdd):
     ss = SparkSession(rdd.context)

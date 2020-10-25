@@ -8,7 +8,7 @@ from pprint import pprint
 
 def get_api_weather_data():
     #personal API key
-    API_KEY = 'fb68dc4a03f52b61ef70e6b9612e2aff'                    
+    API_KEY = 'Add your openweathermap api here!'                    
     city = 'Stockholm'
     lat = 59.3326
     lon = 18.0649
@@ -25,7 +25,7 @@ def kafka_producer(ip, json_data):
 
     for i, data in enumerate(json_data['hourly']):
         producer.send('weather-stream', data)
-        time.sleep(2)
+        #time.sleep(2)
 
 json_data = get_api_weather_data()
 kafka_producer('localhost', json_data)
